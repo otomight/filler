@@ -1,0 +1,5 @@
+/target
+/docker_image
+linux_game_engine
+linux_robots
+*.log
