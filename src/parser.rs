@@ -1,4 +1,4 @@
-use crate::{global::{GHOST_MARKS, MARKS}, log};
+use crate::{global::{GHOST_MARKS, MARKS}};
 
 #[derive(Debug)]
 pub struct Size {
@@ -84,7 +84,7 @@ pub fn read_input(
 
 pub fn read_player(lines_iter: &mut impl Iterator<Item = String>) -> Option<Player> {
 	let mut line = lines_iter.next()?;
-	while !line.ends_with("[target/release/filler]") {
+	while !line.ends_with("filler]") {
 		line = match lines_iter.next() {
 			Some(l) => l,
 			None => return None,

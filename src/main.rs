@@ -1,10 +1,11 @@
 mod logger;
 mod parser;
 mod global;
+mod algo;
 
 use std::{io::{self, BufRead, Write}, sync::Mutex};
 
-use crate::{global::{ERROR_LOGGER, LOGGER}, logger::Logger, parser::{read_input, read_player}};
+use crate::{algo::find_placement, global::{ERROR_LOGGER, LOGGER}, logger::Logger, parser::{read_input, read_player}};
 
 fn main() {
 	init_logger("stdout.log", "stderr.log");
@@ -15,11 +16,17 @@ fn main() {
 	let player = read_player(&mut lines_iter).expect("failed to read player");
 	// log(&format!("{} {}", player.mark, player.ghost_mark));
 	while let Some(turn) = read_input(&player, &mut lines_iter) {
-		// log(&format!("{}", turn.mark));
+		// log(&format!("{}", player.mark));
 		// log(&format!("{:?}", turn.piece_size));
 		// log(&format!("{:?}", turn.piece));
 		// log(&format!("{:?}", turn.anfield_size));
 		// log(&format!("{:?}", turn.anfield));
+		if let Some(p) = find_placement(&turn, player.mark) {
+			write!(stdout, "{} {}\n", p.x, p.y).unwrap();
+		} else {
+			write!(stdout, "0 0\n").unwrap();
+		}
+		stdout.flush().unwrap();
 	}
 }
 
