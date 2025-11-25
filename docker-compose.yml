@@ -1,0 +1,9 @@
+services:
+  filler:
+    build: .
+    container_name: filler
+    working_dir: /filler
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./src:/filler/src

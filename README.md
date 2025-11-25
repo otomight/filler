@@ -19,5 +19,12 @@ cargo build --release # don't forget to compile your solution
 
 # Setup docker
 
-- To build the image `docker build -t filler .`
-- To run the container `docker run --rm -v "$(pwd)"/target:/filler/target -it filler`. This instruction will open a terminal in the container, the directory `target` will be mounted in the container as well. Use `:Z` at the end of the volume path to give rights on Fedora.
+- To build the image and run the container `docker compose run`
+- Build in the docker and run it
+```sh
+cargo build --release # don't forget to compile your solution
+./linux_game_engine -f maps/map01 -p1 target/release/filler -p2 linux_robots/bender
+```
+
+Use `:Z` at the end of the volume path to give rights on Fedora.
+- To Stop and remove container use `docker compose down -v`
